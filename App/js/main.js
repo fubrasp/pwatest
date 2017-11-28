@@ -17,7 +17,11 @@ else {
 
 varcacheName = 'pwaDemo';
 self.addEventListener('fetch', function (event) {
-    event.respondWith(fetch(event.request));
+    event.respondWith(caches.match(event.request).then(response => {return response;
+}), error =>
+    {
+        return fetch(event.request);
+    });
 });
 
 if ('serviceWorker' in navigator) {
