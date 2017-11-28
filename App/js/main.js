@@ -16,10 +16,8 @@ else {
 }
 
 varcacheName = 'pwaDemo';
-self.addEventListener('install', function (event) {
-    event.waitUntil(caches.open(cacheName).then(function (cache) {
-        returncache.addAll(['img/logo.png', 'img/UFR.jpg', 'index.html', 'js/main.js']);
-    }));
+self.addEventListener('fetch', function (event) {
+    event.respondWith(fetch(event.request));
 });
 
 if ('serviceWorker' in navigator) {
